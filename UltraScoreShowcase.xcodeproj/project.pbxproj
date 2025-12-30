@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B6A4B06C4E767DD9DFEB210 /* UltraScoreShowcaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2691103E2C076ED5DFE984 /* UltraScoreShowcaseApp.swift */; };
+		1442A1B0EF446C002A4EEE93 /* ActivitySummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B73DD20C31DBC10CAA9C8EE /* ActivitySummaryCard.swift */; };
+		289D8AC427AA858C6B356BA3 /* LongevityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4905CC1F5E4F23082BD15C53 /* LongevityView.swift */; };
+		29FCF9D893397766D7251477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42DB6FC87704E7E07C64B1 /* Foundation.framework */; };
+		40A4855FF58067012FAAB050 /* HealthIntelligenceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C763AA5992EC767E658EA03 /* HealthIntelligenceCard.swift */; };
+		4AED68A3F7EDA6F1E53D779A /* NowBlockCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605F0458A8220C05C0580254 /* NowBlockCard.swift */; };
+		703EB1A997FE0E33DC80787B /* SleepScreenerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE6FE1DA0E9C424A3A5E62B /* SleepScreenerCard.swift */; };
+		77B0F8368F8FFD14014F2A5D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C06B5AD543EFFCB7249249E /* HomeView.swift */; };
+		9A73206E5E9440448A4361B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC34468D3926F7C8E40760 /* ContentView.swift */; };
+		C07C752ECB8B19D7B0043F45 /* VoiceAIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7EC509BBECEAF2C3CEC636 /* VoiceAIView.swift */; };
+		DC516094D98FC7FD42CB6092 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87889A63BD60BBFE5BFD556 /* AppTheme.swift */; };
+		E1169AC5A5AECC6E3F455DF6 /* BiomarkersSnapshotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735AC4FBA1BFCF72E80EA332 /* BiomarkersSnapshotCard.swift */; };
+		E6DD85442FA5F8CE7198E822 /* CycleHealthCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DAF357CD15767F8E90831 /* CycleHealthCard.swift */; };
+		E718ACAA699C59913F37A2D4 /* CompeteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C1D1D23AEC0A932057684D /* CompeteView.swift */; };
+		EB89D2331DEA071DCA981F99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15AAEF5269F68CDB0B70E0A6 /* Assets.xcassets */; };
+		ED275B7D3186FBFE822E6B18 /* PlugsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5440CC7C824C7F885A63F /* PlugsView.swift */; };
+		F0B9899F045A03D301BCD7D1 /* UltraScoreCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC7F652098AA65074D5275 /* UltraScoreCard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0B73DD20C31DBC10CAA9C8EE /* ActivitySummaryCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivitySummaryCard.swift; path = Views/Components/ActivitySummaryCard.swift; sourceTree = "<group>"; };
+		0C06B5AD543EFFCB7249249E /* HomeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = Views/HomeView.swift; sourceTree = "<group>"; };
+		15AAEF5269F68CDB0B70E0A6 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1CE98325EF5A22BEB6713709 /* UltraScoreShowcase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltraScoreShowcase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D42DB6FC87704E7E07C64B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4905CC1F5E4F23082BD15C53 /* LongevityView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LongevityView.swift; path = Views/LongevityView.swift; sourceTree = "<group>"; };
+		59C1D1D23AEC0A932057684D /* CompeteView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompeteView.swift; path = Views/CompeteView.swift; sourceTree = "<group>"; };
+		5ADC7F652098AA65074D5275 /* UltraScoreCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UltraScoreCard.swift; path = Views/Components/UltraScoreCard.swift; sourceTree = "<group>"; };
+		605F0458A8220C05C0580254 /* NowBlockCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NowBlockCard.swift; path = Views/Components/NowBlockCard.swift; sourceTree = "<group>"; };
+		735AC4FBA1BFCF72E80EA332 /* BiomarkersSnapshotCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BiomarkersSnapshotCard.swift; path = Views/Components/BiomarkersSnapshotCard.swift; sourceTree = "<group>"; };
+		8C763AA5992EC767E658EA03 /* HealthIntelligenceCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HealthIntelligenceCard.swift; path = Views/Components/HealthIntelligenceCard.swift; sourceTree = "<group>"; };
+		8EEC34468D3926F7C8E40760 /* ContentView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B05DAF357CD15767F8E90831 /* CycleHealthCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CycleHealthCard.swift; path = Views/Components/CycleHealthCard.swift; sourceTree = "<group>"; };
+		C6B5440CC7C824C7F885A63F /* PlugsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PlugsView.swift; path = Views/PlugsView.swift; sourceTree = "<group>"; };
+		C87889A63BD60BBFE5BFD556 /* AppTheme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppTheme.swift; path = Theme/AppTheme.swift; sourceTree = "<group>"; };
+		DFE6FE1DA0E9C424A3A5E62B /* SleepScreenerCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SleepScreenerCard.swift; path = Views/Components/SleepScreenerCard.swift; sourceTree = "<group>"; };
+		FB7EC509BBECEAF2C3CEC636 /* VoiceAIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VoiceAIView.swift; path = Views/VoiceAIView.swift; sourceTree = "<group>"; };
+		FE2691103E2C076ED5DFE984 /* UltraScoreShowcaseApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UltraScoreShowcaseApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B204CC31FF7CF89134C53790 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29FCF9D893397766D7251477 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17087933E4398B58AE3708A7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3D42DB6FC87704E7E07C64B1 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		4E868FC46E2CA4A85A80470A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17087933E4398B58AE3708A7 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		60E15B25F8DFB1D683FD71AC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5ADC7F652098AA65074D5275 /* UltraScoreCard.swift */,
+				0B73DD20C31DBC10CAA9C8EE /* ActivitySummaryCard.swift */,
+				605F0458A8220C05C0580254 /* NowBlockCard.swift */,
+				735AC4FBA1BFCF72E80EA332 /* BiomarkersSnapshotCard.swift */,
+				DFE6FE1DA0E9C424A3A5E62B /* SleepScreenerCard.swift */,
+				8C763AA5992EC767E658EA03 /* HealthIntelligenceCard.swift */,
+				B05DAF357CD15767F8E90831 /* CycleHealthCard.swift */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		79E411A8373615108A44AEC3 = {
+			isa = PBXGroup;
+			children = (
+				D733D65DA6BD91FDC8C843A6 /* Products */,
+				4E868FC46E2CA4A85A80470A /* Frameworks */,
+				ADE6AE7D1E191D9234AF6340 /* UltraScoreShowcase */,
+			);
+			sourceTree = "<group>";
+		};
+		9AE315B1ECB50C8186D14460 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				C87889A63BD60BBFE5BFD556 /* AppTheme.swift */,
+			);
+			name = Theme;
+			sourceTree = "<group>";
+		};
+		ADE6AE7D1E191D9234AF6340 /* UltraScoreShowcase */ = {
+			isa = PBXGroup;
+			children = (
+				FE2691103E2C076ED5DFE984 /* UltraScoreShowcaseApp.swift */,
+				9AE315B1ECB50C8186D14460 /* Theme */,
+				DBADFA9738E9BFE13211A756 /* Views */,
+				8EEC34468D3926F7C8E40760 /* ContentView.swift */,
+				15AAEF5269F68CDB0B70E0A6 /* Assets.xcassets */,
+			);
+			path = UltraScoreShowcase;
+			sourceTree = "<group>";
+		};
+		D733D65DA6BD91FDC8C843A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CE98325EF5A22BEB6713709 /* UltraScoreShowcase.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBADFA9738E9BFE13211A756 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4905CC1F5E4F23082BD15C53 /* LongevityView.swift */,
+				59C1D1D23AEC0A932057684D /* CompeteView.swift */,
+				C6B5440CC7C824C7F885A63F /* PlugsView.swift */,
+				0C06B5AD543EFFCB7249249E /* HomeView.swift */,
+				60E15B25F8DFB1D683FD71AC /* Components */,
+				FB7EC509BBECEAF2C3CEC636 /* VoiceAIView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C6B3C55ABB87C16A0B23AE9 /* UltraScoreShowcase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C55A34B962B54828552FE647 /* Build configuration list for PBXNativeTarget "UltraScoreShowcase" */;
+			buildPhases = (
+				A49151FB694D50BACC7C919B /* Sources */,
+				B204CC31FF7CF89134C53790 /* Frameworks */,
+				8824EF7B8DB700027A2FBFBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UltraScoreShowcase;
+			productName = UltraScoreShowcase;
+			productReference = 1CE98325EF5A22BEB6713709 /* UltraScoreShowcase.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04E31610CB95068CB5F8196B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					5C6B3C55ABB87C16A0B23AE9 = {
+						DevelopmentTeam = X98LJY6QYL;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 36BA153FB5EA9CEE8E24E90C /* Build configuration list for PBXProject "UltraScoreShowcase" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 79E411A8373615108A44AEC3;
+			productRefGroup = D733D65DA6BD91FDC8C843A6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C6B3C55ABB87C16A0B23AE9 /* UltraScoreShowcase */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8824EF7B8DB700027A2FBFBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB89D2331DEA071DCA981F99 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A49151FB694D50BACC7C919B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B6A4B06C4E767DD9DFEB210 /* UltraScoreShowcaseApp.swift in Sources */,
+				DC516094D98FC7FD42CB6092 /* AppTheme.swift in Sources */,
+				289D8AC427AA858C6B356BA3 /* LongevityView.swift in Sources */,
+				E718ACAA699C59913F37A2D4 /* CompeteView.swift in Sources */,
+				ED275B7D3186FBFE822E6B18 /* PlugsView.swift in Sources */,
+				77B0F8368F8FFD14014F2A5D /* HomeView.swift in Sources */,
+				F0B9899F045A03D301BCD7D1 /* UltraScoreCard.swift in Sources */,
+				1442A1B0EF446C002A4EEE93 /* ActivitySummaryCard.swift in Sources */,
+				4AED68A3F7EDA6F1E53D779A /* NowBlockCard.swift in Sources */,
+				E1169AC5A5AECC6E3F455DF6 /* BiomarkersSnapshotCard.swift in Sources */,
+				703EB1A997FE0E33DC80787B /* SleepScreenerCard.swift in Sources */,
+				40A4855FF58067012FAAB050 /* HealthIntelligenceCard.swift in Sources */,
+				E6DD85442FA5F8CE7198E822 /* CycleHealthCard.swift in Sources */,
+				C07C752ECB8B19D7B0043F45 /* VoiceAIView.swift in Sources */,
+				9A73206E5E9440448A4361B1 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		413F27D2DB525797CC8E766C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X98LJY6QYL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_GENERATE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = UltraScore;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ultrahuman.UltraScoreShowcase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9F71A2FCF1FE855B2A7CBF01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A2087EE27C7ED8AF76E4199A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X98LJY6QYL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_GENERATE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = UltraScore;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ultrahuman.UltraScoreShowcase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C540CE17EB7B91942271390E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		36BA153FB5EA9CEE8E24E90C /* Build configuration list for PBXProject "UltraScoreShowcase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C540CE17EB7B91942271390E /* Debug */,
+				9F71A2FCF1FE855B2A7CBF01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C55A34B962B54828552FE647 /* Build configuration list for PBXNativeTarget "UltraScoreShowcase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2087EE27C7ED8AF76E4199A /* Release */,
+				413F27D2DB525797CC8E766C /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04E31610CB95068CB5F8196B /* Project object */;
+}
