@@ -26,14 +26,17 @@ struct HomeView: View {
                         }
 
                         // Ultra Score
-                        UltraScoreCard(
-                            score: 79,
-                            contributors: [
-                                ScoreContributor(name: "Movement", value: 88),
-                                ScoreContributor(name: "Sleep", value: 65),
-                                ScoreContributor(name: "Recovery", value: 45)
-                            ]
-                        )
+                        NavigationLink(destination: EffortScoreDetailsView()) {
+                            UltraScoreCard(
+                                score: 79,
+                                contributors: [
+                                    ScoreContributor(name: "Movement", value: 88, route: "movement"),
+                                    ScoreContributor(name: "Sleep", value: 65, route: "sleep"),
+                                    ScoreContributor(name: "Recovery", value: 45, route: "recovery")
+                                ]
+                            )
+                        }
+                        .buttonStyle(PlainButtonStyle())
 
                         // Health Intelligence
                         HealthIntelligenceCard()

@@ -4,6 +4,7 @@ struct ScoreContributor: Identifiable {
     let id = UUID()
     let name: String
     let value: Int
+    var route: String = ""
 
     var color: Color {
         // Color based on score value (0-100) - pastel colors
@@ -146,9 +147,9 @@ struct ContributorRing: View {
         UltraScoreCard(
             score: 79,
             contributors: [
-                ScoreContributor(name: "Movement", value: 88),
-                ScoreContributor(name: "Sleep", value: 65),
-                ScoreContributor(name: "Recovery", value: 45)
+                ScoreContributor(name: "Movement", value: 88, route: "movement"),
+                ScoreContributor(name: "Sleep", value: 65, route: "sleep"),
+                ScoreContributor(name: "Recovery", value: 45, route: "recovery")
             ]
         )
         .padding()
