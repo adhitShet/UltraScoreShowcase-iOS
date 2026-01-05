@@ -8,16 +8,19 @@ struct Biomarker: Identifiable {
     let unit: String
     let bgColor: Color
     let iconColor: Color
+    let route: String
 }
 
 struct BiomarkersSnapshotCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     private let biomarkers: [Biomarker] = [
-        Biomarker(icon: "moon.fill", label: "Sleep Duration", value: "7h 23m", unit: "", bgColor: AppColors.stress.opacity(0.15), iconColor: AppColors.stress),
-        Biomarker(icon: "waveform.path.ecg", label: "HRV", value: "48", unit: "ms", bgColor: AppColors.recovery.opacity(0.15), iconColor: AppColors.recovery),
-        Biomarker(icon: "heart.fill", label: "RHR", value: "58", unit: "bpm", bgColor: AppColors.workout.opacity(0.15), iconColor: AppColors.workout),
-        Biomarker(icon: "timer", label: "Active Time", value: "2h 15m", unit: "", bgColor: AppColors.heartRate.opacity(0.15), iconColor: AppColors.heartRate),
-        Biomarker(icon: "wind", label: "VO2 Max", value: "42", unit: "ml/kg", bgColor: AppColors.zone.opacity(0.15), iconColor: AppColors.zone),
-        Biomarker(icon: "bed.double.fill", label: "Deep Sleep", value: "22", unit: "%", bgColor: AppColors.movement.opacity(0.15), iconColor: AppColors.movement)
+        Biomarker(icon: "moon.fill", label: "Sleep Duration", value: "7h 23m", unit: "", bgColor: AppColors.stress.opacity(0.15), iconColor: AppColors.stress, route: "sleep-duration"),
+        Biomarker(icon: "waveform.path.ecg", label: "HRV", value: "48", unit: "ms", bgColor: AppColors.recovery.opacity(0.15), iconColor: AppColors.recovery, route: "hrv"),
+        Biomarker(icon: "heart.fill", label: "RHR", value: "58", unit: "bpm", bgColor: AppColors.workout.opacity(0.15), iconColor: AppColors.workout, route: "rhr"),
+        Biomarker(icon: "timer", label: "Active Time", value: "2h 15m", unit: "", bgColor: AppColors.heartRate.opacity(0.15), iconColor: AppColors.heartRate, route: "active-time"),
+        Biomarker(icon: "wind", label: "VO2 Max", value: "42", unit: "ml/kg", bgColor: AppColors.zone.opacity(0.15), iconColor: AppColors.zone, route: "vo2max"),
+        Biomarker(icon: "bed.double.fill", label: "Deep Sleep", value: "22", unit: "%", bgColor: AppColors.movement.opacity(0.15), iconColor: AppColors.movement, route: "deep-sleep")
     ]
 
     var body: some View {
@@ -47,14 +50,37 @@ struct BiomarkersSnapshotCard: View {
                     GridItem(.flexible(), spacing: 12)
                 ], spacing: 12) {
                     ForEach(biomarkers) { marker in
-                        BiomarkerRow(biomarker: marker)
+                        NavigationLink(destination: destinationView(for: marker)) {
+                            BiomarkerRow(biomarker: marker)
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
             .padding(20)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+            .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView(for biomarker: Biomarker) -> some View {
+        switch biomarker.route {
+        case "sleep-duration":
+            SleepDurationDetailsView()
+        case "hrv":
+            HRVDetailsView()
+        case "rhr":
+            RHRDetailsView()
+        case "active-time":
+            ActiveTimeDetailsView()
+        case "vo2max":
+            VO2MaxDetailsView()
+        case "deep-sleep":
+            DeepSleepDetailsView()
+        default:
+            EmptyView()
         }
     }
 }
@@ -76,20 +102,24 @@ struct BiomarkerRow: View {
                     Text(biomarker.value)
                         .font(.system(size: 14, weight: .bold))
                         .foregroundColor(AppColors.foreground)
+                        .lineLimit(1)
 
                     if !biomarker.unit.isEmpty {
                         Text(biomarker.unit)
                             .font(.system(size: 10))
                             .foregroundColor(AppColors.mutedForeground)
+                            .lineLimit(1)
                     }
                 }
+                .fixedSize(horizontal: true, vertical: false)
 
                 Text(biomarker.label)
                     .font(.system(size: 10))
                     .foregroundColor(AppColors.mutedForeground)
+                    .lineLimit(1)
             }
 
-            Spacer()
+            Spacer(minLength: 4)
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 10))

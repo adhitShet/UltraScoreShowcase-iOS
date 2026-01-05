@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PlugsView: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
     private let integrations = [
         Integration(name: "Apple Health", icon: "heart.fill", color: AppColors.heartRate, isConnected: true),
         Integration(name: "Strava", icon: "figure.run", color: AppColors.movement, isConnected: true),
@@ -92,7 +93,7 @@ struct IntegrationRow: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 

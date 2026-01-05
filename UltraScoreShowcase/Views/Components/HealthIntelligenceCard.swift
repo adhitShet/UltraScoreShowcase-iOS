@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HealthIntelligenceCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     @State private var isExpanded = false
     @State private var currentInsightIndex = 0
     @State private var showVoiceAI = false
@@ -181,7 +183,7 @@ struct HealthIntelligenceCard: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
         .fullScreenCover(isPresented: $showVoiceAI) {
             VoiceAIView()
         }

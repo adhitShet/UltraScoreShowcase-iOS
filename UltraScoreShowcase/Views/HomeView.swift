@@ -1,10 +1,21 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var showMenu = false
     @State private var selectedDate = Date()
-    @State private var showBatteryNotification = true
+    @State private var showBatteryNotification = false
     @State private var showDatePicker = false
+    @State private var showSleepReveal = true
+    @State private var showWorkoutDetection = false
+    @State private var showWorkoutTracker = false
+
+    // Navigation destinations from side menu
+    @State private var navigationPath = NavigationPath()
+    @State private var showMyRing = false
+    @State private var showAllRings = false
+    @State private var showDevices = false
+    @State private var showIntegrations = false
 
     var body: some View {
         NavigationStack {
@@ -57,7 +68,17 @@ struct HomeView: View {
                         BiomarkersSnapshotCard()
                     }
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, showWorkoutTracker ? 100 : 20)
+                }
+
+                // Floating Workout Tracker
+                if showWorkoutTracker {
+                    VStack {
+                        Spacer()
+                        WorkoutTrackerCard(isPresented: $showWorkoutTracker)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                            .padding(.bottom, 90)
+                    }
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -74,12 +95,92 @@ struct HomeView: View {
                     DateNavigator(selectedDate: $selectedDate, showPicker: $showDatePicker)
                 }
             }
+            .navigationDestination(isPresented: $showMyRing) {
+                MyRingView()
+            }
+            .navigationDestination(isPresented: $showAllRings) {
+                AllRingsView()
+            }
+            .navigationDestination(isPresented: $showDevices) {
+                DevicesView()
+            }
+            .navigationDestination(isPresented: $showIntegrations) {
+                IntegrationsView()
+            }
         }
         .sheet(isPresented: $showDatePicker) {
             DatePickerSheet(selectedDate: $selectedDate, isPresented: $showDatePicker)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
         }
+        .overlay {
+            if showMenu {
+                SideMenuView(isPresented: $showMenu) { destination in
+                    switch destination {
+                    case .myRing:
+                        showMyRing = true
+                    case .allRings:
+                        showAllRings = true
+                    case .devices:
+                        showDevices = true
+                    case .integrations:
+                        showIntegrations = true
+                    }
+                }
+                .transition(.opacity)
+                .zIndex(100)
+            }
+        }
+        .overlay {
+            // Sleep Score Reveal
+            if showSleepReveal {
+                SleepScoreRevealView(
+                    sleepScore: 82,
+                    sleepDuration: "7h 42m",
+                    deepSleep: "1h 23m",
+                    remSleep: "1h 48m",
+                    onDismiss: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showSleepReveal = false
+                        }
+                        // Show battery notification after sleep reveal
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            withAnimation(.spring(response: 0.3)) {
+                                showBatteryNotification = true
+                            }
+                        }
+                        // Show workout detection after delay
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+                            withAnimation(.spring(response: 0.3)) {
+                                showWorkoutDetection = true
+                            }
+                        }
+                    }
+                )
+                .zIndex(200)
+            }
+        }
+        .overlay {
+            // Workout Detection Sheet
+            if showWorkoutDetection {
+                WorkoutDetectionSheet(
+                    isPresented: $showWorkoutDetection,
+                    onQuickStart: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showWorkoutTracker = true
+                        }
+                    },
+                    onChooseActivity: {
+                        withAnimation(.spring(response: 0.3)) {
+                            showWorkoutTracker = true
+                        }
+                    }
+                )
+                .zIndex(150)
+            }
+        }
+        .animation(.spring(response: 0.3), value: showMenu)
+        .animation(.spring(response: 0.3), value: showWorkoutTracker)
     }
 }
 
@@ -96,7 +197,7 @@ struct MenuButton: View {
                     .frame(width: 40, height: 40)
                     .background(AppColors.cardBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+                    .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 4, x: 0, y: 2)
 
                 // Notification dot
                 Circle()
@@ -229,7 +330,7 @@ struct DateNavigator: View {
         .padding(.vertical, 6)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: Color.black.opacity(0.04), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 4, x: 0, y: 2)
     }
 }
 

@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CycleHealthCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Cycle Health")
@@ -41,7 +43,7 @@ struct CycleHealthCard: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 }

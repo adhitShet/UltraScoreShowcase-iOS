@@ -26,6 +26,7 @@ struct MovementContributor: Identifiable {
 
 struct MovementDetailsView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var animatedScore: Double = 0
     @State private var showContent = false
     @State private var expandedWorkouts = false
@@ -142,7 +143,7 @@ struct MovementDetailsView: View {
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Quick Stats
@@ -211,7 +212,7 @@ struct MovementDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Workout Timeline
@@ -349,7 +350,7 @@ struct MovementDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Personalized Factors
@@ -399,7 +400,7 @@ struct MovementDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -426,7 +427,7 @@ struct StatCard: View {
         .padding(.vertical, 12)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
     }
 }
 
@@ -501,9 +502,9 @@ struct WorkoutRow: View {
                 .clipShape(Circle())
         }
         .padding(8)
-        .background(Color.white.opacity(0.02))
+        .background(AppColors.cardBackground.opacity(0.5))
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.white.opacity(0.05), lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 12).stroke(AppColors.border.opacity(0.3), lineWidth: 1))
     }
 }
 
@@ -561,7 +562,7 @@ struct MovementContributorCard: View {
         }
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
     }
 }
 
@@ -577,8 +578,10 @@ struct FactorChip: View {
             Text(text)
                 .font(.system(size: 12))
                 .foregroundColor(AppColors.foreground)
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background((isPositive ? AppColors.recovery : AppColors.heartRate).opacity(0.1))
         .overlay(

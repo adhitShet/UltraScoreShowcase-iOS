@@ -12,6 +12,8 @@ struct Activity: Identifiable {
 }
 
 struct ActivitySummaryCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     @State private var activities: [Activity] = [
         Activity(label: "Evening Walk", icon: "figure.walk", time: "5:45pm", duration: "25min", calories: 95, effortPoints: 3, confirmed: false),
         Activity(label: "Walk", icon: "figure.walk", time: "6:30 - 7:00 AM", duration: "25 mins", calories: 65, effortPoints: 5, confirmed: true),
@@ -119,7 +121,7 @@ struct ActivitySummaryCard: View {
             .padding(12)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 
@@ -159,10 +161,12 @@ struct ActivityRow: View {
                     Text(activity.label)
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(AppColors.foreground)
+                        .lineLimit(1)
 
                     Text(activity.time)
                         .font(.system(size: 10))
                         .foregroundColor(AppColors.mutedForeground)
+                        .lineLimit(1)
                 }
 
                 HStack(spacing: 8) {

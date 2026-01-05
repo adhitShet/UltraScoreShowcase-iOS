@@ -29,6 +29,7 @@ struct OutcomeItem: Identifiable {
 }
 
 struct EffortScoreDetailsView: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
     @Environment(\.dismiss) private var dismiss
     let score: Int = 79
 
@@ -148,7 +149,7 @@ struct EffortScoreDetailsView: View {
         .padding(24)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Contributors Section
@@ -160,7 +161,10 @@ struct EffortScoreDetailsView: View {
                 .padding(.leading, 4)
 
             ForEach(Array(contributors.enumerated()), id: \.element.id) { index, contributor in
-                ContributorRow(contributor: contributor, showAnimation: showContributors, delay: Double(index) * 0.1)
+                NavigationLink(destination: destinationView(for: contributor)) {
+                    ContributorRow(contributor: contributor, showAnimation: showContributors, delay: Double(index) * 0.1)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
 
             // See Weightages Button
@@ -254,6 +258,20 @@ struct EffortScoreDetailsView: View {
             .clipShape(RoundedRectangle(cornerRadius: 20))
         }
     }
+
+    @ViewBuilder
+    private func destinationView(for contributor: ScoreContributorItem) -> some View {
+        switch contributor.route {
+        case "movement":
+            MovementDetailsView()
+        case "sleep":
+            SleepDetailsView()
+        case "recovery":
+            RecoveryDetailsView()
+        default:
+            EmptyView()
+        }
+    }
 }
 
 // MARK: - Contributor Row
@@ -308,7 +326,7 @@ struct ContributorRow: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
         .onAppear {
             if showAnimation {
                 withAnimation(.easeOut(duration: 0.8).delay(delay)) {
@@ -357,7 +375,7 @@ struct OutcomeRow: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
     }
 }
 

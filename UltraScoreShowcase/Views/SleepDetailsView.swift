@@ -11,6 +11,7 @@ struct SleepStage: Identifiable {
 
 struct SleepDetailsView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var animatedScore: Double = 0
     @State private var showContent = false
     @State private var selectedTimeFilter = "week"
@@ -132,7 +133,7 @@ struct SleepDetailsView: View {
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Sleep Duration Card
@@ -192,7 +193,7 @@ struct SleepDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Sleep Stages Section
@@ -244,7 +245,7 @@ struct SleepDetailsView: View {
                 .padding(12)
                 .background(AppColors.cardBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
-                .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+                .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
             }
         }
     }
@@ -304,7 +305,7 @@ struct SleepDetailsView: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 
@@ -326,7 +327,7 @@ struct SleepDetailsView: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 
@@ -366,7 +367,7 @@ struct SleepDetailsView: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 
@@ -412,7 +413,7 @@ struct SleepDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Personalized Tips
@@ -431,7 +432,7 @@ struct SleepDetailsView: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 24))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 }

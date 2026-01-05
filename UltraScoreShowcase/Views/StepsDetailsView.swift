@@ -2,6 +2,7 @@ import SwiftUI
 
 struct StepsDetailsView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var animatedSteps: Double = 0
     @State private var showContent = false
     @State private var selectedTimeFilter = "day"
@@ -102,7 +103,7 @@ struct StepsDetailsView: View {
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Progress Card
@@ -158,7 +159,7 @@ struct StepsDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Hourly Breakdown
@@ -224,7 +225,7 @@ struct StepsDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Weekly Trends
@@ -262,7 +263,7 @@ struct StepsDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Stats Cards
@@ -283,7 +284,7 @@ struct StepsDetailsView: View {
             .padding(.vertical, 20)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
 
             VStack(spacing: 8) {
                 Image(systemName: "flame.fill")
@@ -300,7 +301,7 @@ struct StepsDetailsView: View {
             .padding(.vertical, 20)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
 
             VStack(spacing: 8) {
                 Image(systemName: "timer")
@@ -317,7 +318,7 @@ struct StepsDetailsView: View {
             .padding(.vertical, 20)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
     }
 
@@ -375,7 +376,7 @@ struct StepsDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     private func formatNumber(_ number: Int) -> String {

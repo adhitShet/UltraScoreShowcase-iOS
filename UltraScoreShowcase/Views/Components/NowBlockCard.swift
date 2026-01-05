@@ -10,6 +10,8 @@ struct TimeWindow: Identifiable {
 }
 
 struct NowBlockCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     let heartRate: Int
     let stressLevel: String
     let steps: Int
@@ -61,14 +63,17 @@ struct NowBlockCard: View {
             // Metrics Grid
             HStack(spacing: 12) {
                 // Heart Rate
-                NowMetricCard(
-                    icon: "heart.fill",
-                    iconColor: AppColors.heartRate,
-                    value: "\(liveHeartRate)",
-                    unit: "bpm",
-                    subtitle: "Zone 2",
-                    subtitleColor: AppColors.zone
-                )
+                NavigationLink(destination: LiveHRDetailsView()) {
+                    NowMetricCard(
+                        icon: "heart.fill",
+                        iconColor: AppColors.heartRate,
+                        value: "\(liveHeartRate)",
+                        unit: "bpm",
+                        subtitle: "Zone 2",
+                        subtitleColor: AppColors.zone
+                    )
+                }
+                .buttonStyle(PlainButtonStyle())
 
                 // Stress
                 NowMetricCard(
@@ -81,7 +86,10 @@ struct NowBlockCard: View {
                 )
 
                 // Steps
-                StepsNowMetricCard(steps: liveSteps)
+                NavigationLink(destination: StepsDetailsView()) {
+                    StepsNowMetricCard(steps: liveSteps)
+                }
+                .buttonStyle(PlainButtonStyle())
             }
 
             // Active Windows
@@ -117,7 +125,7 @@ struct NowBlockCard: View {
             .padding(16)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
         }
         .onAppear {
             startLiveUpdates()
@@ -174,7 +182,7 @@ struct NowMetricCard: View {
         .padding(.vertical, 16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -229,7 +237,7 @@ struct StepsNowMetricCard: View {
         .padding(.vertical, 16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 

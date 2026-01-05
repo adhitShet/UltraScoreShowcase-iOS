@@ -16,6 +16,7 @@ struct RecoveryContributor: Identifiable {
 
 struct RecoveryDetailsView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var animatedScore: Double = 0
     @State private var showContent = false
     @State private var selectedTimeFilter = "week"
@@ -152,7 +153,7 @@ struct RecoveryDetailsView: View {
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
     }
 
     // MARK: - Training Readiness Scale
@@ -373,7 +374,7 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Contributors Section
@@ -464,7 +465,7 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Heart Rate Graph
@@ -537,7 +538,7 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Recovery Trends
@@ -606,7 +607,7 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Recovery Debt
@@ -672,7 +673,7 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 
     // MARK: - Personalized Factors
@@ -722,13 +723,14 @@ struct RecoveryDetailsView: View {
         .padding(16)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 24))
-        .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 
 // MARK: - Recovery Contributor Card
 struct RecoveryContributorCard: View {
     let contributor: RecoveryContributor
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var isExpanded = false
 
     var body: some View {
@@ -781,7 +783,7 @@ struct RecoveryContributorCard: View {
         }
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.25 : 0.02), radius: 4, x: 0, y: 2)
     }
 }
 

@@ -14,6 +14,8 @@ struct ScoreContributor: Identifiable {
 }
 
 struct UltraScoreCard: View {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     let score: Int
     let contributors: [ScoreContributor]
 
@@ -75,10 +77,13 @@ struct UltraScoreCard: View {
             // Contributors
             HStack(spacing: 12) {
                 ForEach(Array(contributors.enumerated()), id: \.element.id) { index, contributor in
-                    ContributorRing(
-                        contributor: contributor,
-                        animatedValue: index < animatedContributors.count ? animatedContributors[index] : 0
-                    )
+                    NavigationLink(destination: destinationView(for: contributor)) {
+                        ContributorRing(
+                            contributor: contributor,
+                            animatedValue: index < animatedContributors.count ? animatedContributors[index] : 0
+                        )
+                    }
+                    .buttonStyle(PlainButtonStyle())
                 }
             }
         }
@@ -86,7 +91,7 @@ struct UltraScoreCard: View {
         .frame(maxWidth: .infinity)
         .background(AppColors.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: 28))
-        .shadow(color: Color.black.opacity(0.04), radius: 12, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(ThemeManager.shared.isDarkMode ? 0.3 : 0.04), radius: 12, x: 0, y: 4)
         .onAppear {
             animatedContributors = Array(repeating: 0, count: contributors.count)
             withAnimation(.easeOut(duration: 1.5).delay(0.3)) {
@@ -99,6 +104,20 @@ struct UltraScoreCard: View {
                     }
                 }
             }
+        }
+    }
+
+    @ViewBuilder
+    private func destinationView(for contributor: ScoreContributor) -> some View {
+        switch contributor.route {
+        case "movement":
+            MovementDetailsView()
+        case "sleep":
+            SleepDetailsView()
+        case "recovery":
+            RecoveryDetailsView()
+        default:
+            EmptyView()
         }
     }
 }

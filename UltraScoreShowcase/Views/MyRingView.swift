@@ -2,9 +2,12 @@ import SwiftUI
 
 struct MyRingView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var themeManager = ThemeManager.shared
     @State private var airplaneMode = false
     @State private var backgroundSync = true
-    @State private var batteryLevel: Double = 0.87
+    @State private var batteryLevel: Double = 0.96
+    @State private var ringScale: CGFloat = 0.9
+    @State private var ringOpacity: Double = 0
 
     var body: some View {
         ScrollView {
@@ -15,28 +18,28 @@ struct MyRingView: View {
                 // Ring Visualization
                 ringVisualization
 
-                // Protect Banner
-                protectBanner
-
-                // Ring Warranty
-                warrantyCard
-
-                // Battery Mode
-                batteryModeCard
-
-                // Airplane Mode
-                airplaneModeCard
-
-                // Background Sync
-                backgroundSyncCard
-
-                // Firmware Version
-                firmwareCard
+                // Cards
+                VStack(spacing: 12) {
+                    protectBanner
+                    warrantyCard
+                    batteryModeCard
+                    airplaneModeCard
+                    backgroundSyncCard
+                }
             }
             .padding(.horizontal, 16)
             .padding(.bottom, 40)
         }
-        .background(AppColors.background.ignoresSafeArea())
+        .background(
+            LinearGradient(
+                colors: themeManager.isDarkMode
+                    ? [Color(hex: "#0F1419"), Color(hex: "#131A24")]
+                    : [Color(hex: "#F1F5F9"), Color(hex: "#E2E8F0")],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        )
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -45,8 +48,6 @@ struct MyRingView: View {
                         .font(.system(size: 20, weight: .medium))
                         .foregroundColor(AppColors.mutedForeground)
                         .frame(width: 40, height: 40)
-                        .background(AppColors.cardBackground)
-                        .clipShape(Circle())
                 }
             }
 
@@ -57,8 +58,9 @@ struct MyRingView: View {
             }
         }
         .onAppear {
-            withAnimation(.easeOut(duration: 1.0)) {
-                batteryLevel = 0.87
+            withAnimation(.easeOut(duration: 0.5)) {
+                ringScale = 1
+                ringOpacity = 1
             }
         }
     }
@@ -71,13 +73,13 @@ struct MyRingView: View {
                     .font(.system(size: 10, weight: .medium))
                     .tracking(1)
                     .foregroundColor(AppColors.mutedForeground)
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Text("Connected")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(AppColors.foreground)
                     Circle()
-                        .fill(Color(hex: "#22C55E"))
-                        .frame(width: 8, height: 8)
+                        .fill(AppColors.recovery)
+                        .frame(width: 10, height: 10)
                 }
             }
 
@@ -89,82 +91,73 @@ struct MyRingView: View {
                     .tracking(1)
                     .foregroundColor(AppColors.mutedForeground)
                 HStack(spacing: 6) {
-                    Text("5:11 PM")
-                        .font(.system(size: 14, weight: .medium))
+                    Text("11:32 AM")
+                        .font(.system(size: 16, weight: .semibold))
                         .foregroundColor(AppColors.foreground)
                     Image(systemName: "checkmark")
-                        .font(.system(size: 12, weight: .semibold))
-                        .foregroundColor(Color(hex: "#22C55E"))
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(AppColors.primary)
                 }
             }
         }
-        .padding(.horizontal, 8)
+        .padding(.top, 8)
     }
 
     // MARK: - Ring Visualization
     private var ringVisualization: some View {
         VStack(spacing: 16) {
             ZStack {
-                // Outer glow ring
+                // Outer ring with shadow
                 Circle()
-                    .stroke(AppColors.border.opacity(0.3), lineWidth: 2)
+                    .fill(AppColors.cardBackground)
                     .frame(width: 192, height: 192)
+                    .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.4 : 0.15), radius: 20, x: 0, y: 8)
 
-                // Battery arc indicator
+                // Battery progress arc
                 Circle()
                     .trim(from: 0, to: batteryLevel)
-                    .stroke(AppColors.foreground, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                    .frame(width: 180, height: 180)
+                    .stroke(AppColors.mutedForeground.opacity(0.5), style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                    .frame(width: 184, height: 184)
                     .rotationEffect(.degrees(-90))
 
                 // Background arc
                 Circle()
                     .trim(from: batteryLevel, to: 1)
-                    .stroke(AppColors.border.opacity(0.2), lineWidth: 4)
-                    .frame(width: 180, height: 180)
+                    .stroke(AppColors.mutedForeground.opacity(0.3), lineWidth: 3)
+                    .frame(width: 184, height: 184)
                     .rotationEffect(.degrees(-90))
 
-                // Center ring visual
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [AppColors.border.opacity(0.4), AppColors.border.opacity(0.2)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
+                // Inner dark ring (stays dark in both modes for contrast)
+                Circle()
+                    .fill(
+                        LinearGradient(
+                            colors: [Color(hex: "#1E293B"), Color(hex: "#0F172A")],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
-                        .frame(width: 128, height: 128)
-                        .overlay(Circle().stroke(AppColors.border.opacity(0.5), lineWidth: 1))
+                    )
+                    .frame(width: 144, height: 144)
+                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 4)
 
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [AppColors.background, AppColors.border.opacity(0.3)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 96, height: 96)
-                        .overlay(Circle().stroke(AppColors.border.opacity(0.3), lineWidth: 1))
-
-                    Image(systemName: "flame.fill")
-                        .font(.system(size: 28))
-                        .foregroundColor(AppColors.mutedForeground)
-                }
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+                // Snowflake icon
+                Image(systemName: "snowflake")
+                    .font(.system(size: 40))
+                    .foregroundColor(Color(hex: "#64748B"))
             }
-            .padding(.vertical, 16)
+            .scaleEffect(ringScale)
+            .opacity(ringOpacity)
+            .padding(.vertical, 24)
 
             // Mode & Battery
             VStack(spacing: 4) {
-                Text("Turbo Mode Active")
-                    .font(.system(size: 18, weight: .semibold))
+                Text("Chill Mode Active")
+                    .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(AppColors.foreground)
                 Text("Battery \(Int(batteryLevel * 100))%")
-                    .font(.system(size: 14))
+                    .font(.system(size: 15))
                     .foregroundColor(AppColors.mutedForeground)
             }
+            .opacity(ringOpacity)
         }
     }
 
@@ -172,23 +165,24 @@ struct MyRingView: View {
     private var protectBanner: some View {
         Button(action: {}) {
             HStack {
-                HStack(spacing: 12) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 12))
-                        .foregroundColor(AppColors.mutedForeground)
-                    Text("Protect your ring with UltrahumanX")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(AppColors.primary)
-                }
+                Image(systemName: "shield.fill")
+                    .font(.system(size: 18))
+                    .foregroundColor(AppColors.primary)
+
+                Text("Protect your ring with UltrahumanX")
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundColor(AppColors.primary)
+
                 Spacer()
+
                 Image(systemName: "chevron.right")
                     .font(.system(size: 14))
                     .foregroundColor(AppColors.mutedForeground)
             }
             .padding(16)
             .background(AppColors.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.05), radius: 4, x: 0, y: 2)
         }
     }
 
@@ -196,17 +190,17 @@ struct MyRingView: View {
     private var warrantyCard: some View {
         HStack {
             Text("Ring Warranty")
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(AppColors.foreground)
             Spacer()
-            Text("Valid till 5 Jun, 2026")
-                .font(.system(size: 14))
+            Text("Valid till 18 Jun, 2026")
+                .font(.system(size: 15))
                 .foregroundColor(AppColors.mutedForeground)
         }
         .padding(16)
         .background(AppColors.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.05), radius: 4, x: 0, y: 2)
     }
 
     // MARK: - Battery Mode Card
@@ -215,11 +209,10 @@ struct MyRingView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Choose a battery usage mode")
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(AppColors.foreground)
-                    Text("CURRENT: TURBO MODE")
-                        .font(.system(size: 10, weight: .medium))
-                        .tracking(1)
+                    Text("CURRENT: CHILL MODE")
+                        .font(.system(size: 11, weight: .semibold))
                         .foregroundColor(AppColors.primary)
                 }
                 Spacer()
@@ -229,8 +222,8 @@ struct MyRingView: View {
             }
             .padding(16)
             .background(AppColors.cardBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.05), radius: 4, x: 0, y: 2)
         }
     }
 
@@ -239,11 +232,12 @@ struct MyRingView: View {
         HStack(alignment: .top, spacing: 16) {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Airplane Mode")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.foreground)
                 Text("Turns off all radio communications with the Ring. The Ring will still keep recording data on its own.")
-                    .font(.system(size: 13))
+                    .font(.system(size: 14))
                     .foregroundColor(AppColors.mutedForeground)
+                    .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Toggle("", isOn: $airplaneMode)
@@ -252,8 +246,8 @@ struct MyRingView: View {
         }
         .padding(16)
         .background(AppColors.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.05), radius: 4, x: 0, y: 2)
     }
 
     // MARK: - Background Sync Card
@@ -261,11 +255,12 @@ struct MyRingView: View {
         HStack(alignment: .top, spacing: 16) {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Background Sync")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(AppColors.foreground)
-                Text("Allows the app to sync data with your ring in the background for up-to-date metrics.")
-                    .font(.system(size: 13))
+                Text("Ring syncs with the app automatically in the background. Turning this off can help conserve battery life.")
+                    .font(.system(size: 14))
                     .foregroundColor(AppColors.mutedForeground)
+                    .lineSpacing(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Toggle("", isOn: $backgroundSync)
@@ -274,25 +269,8 @@ struct MyRingView: View {
         }
         .padding(16)
         .background(AppColors.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
-    }
-
-    // MARK: - Firmware Card
-    private var firmwareCard: some View {
-        HStack {
-            Text("Firmware Version")
-                .font(.system(size: 14, weight: .medium))
-                .foregroundColor(AppColors.foreground)
-            Spacer()
-            Text("v2.4.1")
-                .font(.system(size: 14))
-                .foregroundColor(AppColors.mutedForeground)
-        }
-        .padding(16)
-        .background(AppColors.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(color: Color.black.opacity(0.02), radius: 4, x: 0, y: 2)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.05), radius: 4, x: 0, y: 2)
     }
 }
 

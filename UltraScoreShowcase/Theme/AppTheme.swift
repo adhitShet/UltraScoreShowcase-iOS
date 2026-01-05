@@ -1,40 +1,118 @@
 import SwiftUI
 
-// MARK: - App Colors (matching Lovable theme)
+// MARK: - Theme Manager
+class ThemeManager: ObservableObject {
+    static let shared = ThemeManager()
+
+    @AppStorage("isDarkMode") var isDarkMode: Bool = false {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+
+    func toggleTheme() {
+        isDarkMode.toggle()
+    }
+}
+
+// MARK: - App Colors (Dynamic Light/Dark Mode)
 struct AppColors {
+    // Reference to theme manager
+    private static var isDark: Bool {
+        ThemeManager.shared.isDarkMode
+    }
+
     // Background colors
-    static let background = Color(hex: "#FAFAFA")
-    static let cardBackground = Color.white
+    static var background: Color {
+        isDark ? Color(hex: "#0F1419") : Color(hex: "#FAFAFA")
+    }
+
+    static var cardBackground: Color {
+        isDark ? Color(hex: "#131A24") : Color.white
+    }
 
     // Text colors
-    static let foreground = Color(hex: "#14203A")
-    static let mutedForeground = Color(hex: "#5C6A7E")
-    static let secondaryForeground = Color(hex: "#8B95A5")
+    static var foreground: Color {
+        isDark ? Color(hex: "#EEF1F6") : Color(hex: "#14203A")
+    }
 
-    // Primary (Purple)
-    static let primary = Color(hex: "#7C3AED")
-    static let primaryLight = Color(hex: "#7C3AED").opacity(0.15)
+    static var mutedForeground: Color {
+        isDark ? Color(hex: "#7A8FA3") : Color(hex: "#5C6A7E")
+    }
 
-    // Health metric colors
-    static let movement = Color(hex: "#F97316")      // Orange
-    static let stress = Color(hex: "#8B5CF6")        // Purple
-    static let recovery = Color(hex: "#10B981")      // Green/Teal
-    static let workout = Color(hex: "#EC4899")       // Pink
-    static let heartRate = Color(hex: "#EF4444")     // Red
-    static let zone = Color(hex: "#0EA5E9")          // Cyan/Blue
+    static var secondaryForeground: Color {
+        isDark ? Color(hex: "#D9E0E8") : Color(hex: "#8B95A5")
+    }
+
+    // Primary (Teal in dark, Purple in light)
+    static var primary: Color {
+        isDark ? Color(hex: "#1EC9A0") : Color(hex: "#7C3AED")
+    }
+
+    static var primaryLight: Color {
+        primary.opacity(0.15)
+    }
+
+    // Health metric colors (optimized for each mode)
+    static var movement: Color {
+        isDark ? Color(hex: "#FFB71D") : Color(hex: "#F97316")
+    }
+
+    static var stress: Color {
+        isDark ? Color(hex: "#FF6B6B") : Color(hex: "#8B5CF6")
+    }
+
+    static var recovery: Color {
+        isDark ? Color(hex: "#32D4A3") : Color(hex: "#10B981")
+    }
+
+    static var workout: Color {
+        isDark ? Color(hex: "#8B5CF6") : Color(hex: "#EC4899")
+    }
+
+    static var heartRate: Color {
+        isDark ? Color(hex: "#FF7777") : Color(hex: "#EF4444")
+    }
+
+    static var zone: Color {
+        isDark ? Color(hex: "#1EC9A0") : Color(hex: "#0EA5E9")
+    }
 
     // Border and dividers
-    static let border = Color(hex: "#E2E8F0")
-    static let divider = Color(hex: "#E2E8F0")
+    static var border: Color {
+        isDark ? Color(hex: "#1E2A3F") : Color(hex: "#E2E8F0")
+    }
+
+    static var divider: Color {
+        isDark ? Color(hex: "#1E2A3F") : Color(hex: "#E2E8F0")
+    }
 
     // Glass effect
-    static let glassBg = Color.white.opacity(0.6)
-    static let glassBorder = Color(hex: "#14203A").opacity(0.08)
+    static var glassBg: Color {
+        isDark ? Color(hex: "#131A24").opacity(0.8) : Color.white.opacity(0.6)
+    }
+
+    static var glassBorder: Color {
+        isDark ? Color(hex: "#1E2A3F") : Color(hex: "#14203A").opacity(0.08)
+    }
 
     // Status colors
-    static let success = Color(hex: "#10B981")
-    static let warning = Color(hex: "#F59E0B")
-    static let error = Color(hex: "#EF4444")
+    static var success: Color {
+        isDark ? Color(hex: "#32D4A3") : Color(hex: "#10B981")
+    }
+
+    static var warning: Color {
+        isDark ? Color(hex: "#FFC72C") : Color(hex: "#F59E0B")
+    }
+
+    static var error: Color {
+        isDark ? Color(hex: "#FF5555") : Color(hex: "#EF4444")
+    }
+
+    // Secondary surface (for dark mode cards within cards)
+    static var secondaryBackground: Color {
+        isDark ? Color(hex: "#1A2538") : Color(hex: "#F1F5F9")
+    }
 }
 
 // MARK: - Color Extension for Hex
@@ -66,6 +144,7 @@ extension Color {
 
 // MARK: - Card Style Modifier
 struct CardStyle: ViewModifier {
+    @ObservedObject private var themeManager = ThemeManager.shared
     var padding: CGFloat = 16
     var cornerRadius: CGFloat = 20
 
@@ -74,7 +153,7 @@ struct CardStyle: ViewModifier {
             .padding(padding)
             .background(AppColors.cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 2)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.3 : 0.04), radius: 8, x: 0, y: 2)
     }
 }
 
@@ -86,6 +165,7 @@ extension View {
 
 // MARK: - Glass Card Style
 struct GlassCardStyle: ViewModifier {
+    @ObservedObject private var themeManager = ThemeManager.shared
     var padding: CGFloat = 16
     var cornerRadius: CGFloat = 24
 
@@ -97,19 +177,35 @@ struct GlassCardStyle: ViewModifier {
                     .fill(AppColors.glassBg)
                     .background(
                         RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(.white)
+                            .fill(AppColors.cardBackground)
                     )
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(AppColors.glassBorder, lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.04), radius: 8, x: 0, y: 4)
+            .shadow(color: Color.black.opacity(themeManager.isDarkMode ? 0.4 : 0.04), radius: 8, x: 0, y: 4)
     }
 }
 
 extension View {
     func glassCardStyle(padding: CGFloat = 16, cornerRadius: CGFloat = 24) -> some View {
         modifier(GlassCardStyle(padding: padding, cornerRadius: cornerRadius))
+    }
+}
+
+// MARK: - Theme-Aware View Modifier
+struct ThemeAware: ViewModifier {
+    @ObservedObject private var themeManager = ThemeManager.shared
+
+    func body(content: Content) -> some View {
+        content
+            .id(themeManager.isDarkMode) // Force view refresh on theme change
+    }
+}
+
+extension View {
+    func themeAware() -> some View {
+        modifier(ThemeAware())
     }
 }
